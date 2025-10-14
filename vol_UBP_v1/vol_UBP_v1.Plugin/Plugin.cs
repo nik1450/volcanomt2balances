@@ -38,13 +38,12 @@ namespace vol_UBP_v1.Plugin
                 MyPluginInfo.PLUGIN_GUID,
                 c =>
                 {
-                    // Be sure to include all of your json files if you add more.
-                    // Be sure to update the project configuration if you include more folders
-                    //   the project only copies json files in the json folder and not in subdirectories.
-                    c.AddMergedJsonFile(
-                        "json/plugin.json",
-                        "json/global.json"
-                    );
+                    // Load/merge JSON config files (later calls override earlier values)
+                    c.AddJsonFile("json/plugin.json", optional: false, reloadOnChange: true);
+                    c.AddJsonFile("json/global.json", optional: true,  reloadOnChange: true);
+
+        // If you also want to ship your balance changes here (optional):
+        // c.AddJsonFile("json/balance_changes.json", optional: true, reloadOnChange: true);
                 }
             );
 
